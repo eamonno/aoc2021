@@ -15,8 +15,8 @@ defmodule Navigate do
   def aim({:up, n}, {horizontal, depth, aim}), do: {horizontal, depth, aim - n}
 end
 
-part_one = Enum.reduce(input, {0, 0}, &Navigate.navigate/2) |> IO.inspect()
+part_one = Enum.reduce(input, {0, 0}, &Navigate.navigate/2)
 IO.puts("Part 1 answer: #{inspect(part_one)}, #{elem(part_one, 0) * elem(part_one, 1)}")
 
-part_two = Enum.reduce(input, {0, 0, 0}, &Navigate.aim/2) |> IO.inspect()
+part_two = Enum.reduce(input, {0, 0, 0}, &Navigate.aim/2)
 IO.puts("Part 2 answer: #{inspect(part_two)}, #{elem(part_two, 0) * elem(part_two, 1)}")
