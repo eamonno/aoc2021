@@ -32,6 +32,22 @@ defmodule BingoBoard do
     end
   end
 
+  def find_place(boards, balls, place) do
+    boards_remaining = length(boards) + 1 - place
+
+    Enum.reduce_while(balls, boards, fn ball, boards ->
+      boards = boards |> Enum.map(&BingoBoard.mark(&1, ball))
+
+      case {length(boards), Enum.find_value(boards, &BingoBoard.score(&1, ball))} do
+        {^boards_remaining, {:win, score}} ->
+          {:halt, score}
+
+        _ ->
+          {:cont, boards |> Enum.reject(&BingoBoard.score(&1, ball))}
+      end
+    end)
+  end
+
   def print(%__MODULE__{squares: squares}) do
     squares
     |> Enum.with_index()
@@ -58,30 +74,7 @@ boards =
   |> Enum.chunk_every(25)
   |> Enum.map(&BingoBoard.create/1)
 
-first_place =
-  Enum.reduce_while(balls, boards, fn ball, boards ->
-    boards = boards |> Enum.map(&BingoBoard.mark(&1, ball))
-
-    case Enum.find_value(boards, &BingoBoard.score(&1, ball)) do
-      {:win, score} ->
-        {:halt, score}
-
-      _ ->
-        {:cont, boards}
-    end
-  end)
-
-last_place =
-  Enum.reduce_while(balls, boards, fn ball, boards ->
-    boards = boards |> Enum.map(&BingoBoard.mark(&1, ball))
-
-    case {length(boards), Enum.find_value(boards, &BingoBoard.score(&1, ball))} do
-      {1, {:win, score}} ->
-        {:halt, score}
-
-      _ ->
-        {:cont, boards |> Enum.reject(&BingoBoard.score(&1, ball))}
-    end
-  end)
+first_place = BingoBoard.find_place(boards, balls, 1)
+last_place = BingoBoard.find_place(boards, balls, length(boards))
 
 IO.puts("First place scores #{first_place}, last place scores #{last_place}.")
