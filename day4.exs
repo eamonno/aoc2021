@@ -21,7 +21,7 @@ defmodule BingoBoard do
       [] ->
         nil
 
-      [_hd | _] ->
+      [_ | _] ->
         {:win,
          last_ball *
            (squares
