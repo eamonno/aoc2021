@@ -47,22 +47,6 @@ defmodule BingoBoard do
       end
     end)
   end
-
-  def print(%__MODULE__{squares: squares}) do
-    squares
-    |> Enum.with_index()
-    |> Enum.map(fn {sq, index} ->
-      case sq do
-        {:marked, num} ->
-          IO.ANSI.light_green() <> String.pad_leading(Integer.to_string(num), 3) <> " "
-
-        {:unmarked, num} ->
-          IO.ANSI.light_white() <> String.pad_leading(Integer.to_string(num), 3) <> " "
-      end <> if(index > 0 and rem(index + 1, 5) == 0, do: "\n", else: "") <> IO.ANSI.reset()
-    end)
-    |> Enum.join()
-    |> IO.puts()
-  end
 end
 
 [ball_data | board_data] = File.read!("day/4/input") |> String.split() |> List.flatten()
