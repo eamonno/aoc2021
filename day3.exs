@@ -7,6 +7,7 @@ input =
 defmodule Day3 do
   use Bitwise
 
+  # Set to 4 if you want to use sample data, 11 for input.
   @high_bit 11
 
   def gamma_epsilon(numbers) do
