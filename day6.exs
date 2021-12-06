@@ -15,7 +15,7 @@ Enum.reduce(1..Enum.max(days), Enum.frequencies(fish), fn day, fish ->
     else
       fish
     end
-    |> Enum.into(%{}, fn {n, v} -> {n - 1, v} end)
+    |> Enum.into(%{}, fn {days_to_go, fish_spawning} -> {days_to_go - 1, fish_spawning} end)
 
   if day in days do
     IO.puts("After #{day} days #{Map.values(fish) |> Enum.sum()} fish.")
