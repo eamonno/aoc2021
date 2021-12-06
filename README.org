@@ -1,0 +1,5 @@
+#+title: Advent of Code 2021 Solutions in Elixir
+#+author: Eamonn O'Brien
+
+* Notes
+This project is just my own solutions to the Advent of Code problems in 2021 all written in Elixir. There is no great overriding structure or purpose here. Depending on my mood and time available they can be anything from neatly written code that is supposed to be at least somewhat structured to a quick and dirty script that is not quite as legible. Mostly I have tried to use somewhat readable variable names in here but unless you have at least read through the problems it's probably going to be hard to figure out going on. If you have read through the problems it should usually be pretty straight forward.
